@@ -1,6 +1,7 @@
 package com.example.shoppingmall2.home.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,9 +15,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shoppingmall2.R;
+import com.example.shoppingmall2.activity.GoodsInfoActivity;
 import com.example.shoppingmall2.home.bean.HomeBean;
 import com.example.shoppingmall2.home.utils.GlideImageLoader;
 import com.example.shoppingmall2.utils.Constants;
+import com.example.shoppingmall2.view.MyGridView;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
 import com.zhy.magicviewpager.transformer.RotateYTransformer;
@@ -314,6 +317,59 @@ public class HomeAdapter extends RecyclerView.Adapter {
         };
 
 
+    }
+
+    class HotViewHolder extends RecyclerView.ViewHolder {
+        private final Context mContext;
+        @BindView(R.id.tv_more_hot)
+        TextView tvMoreHot;
+        @BindView(R.id.gv_hot)
+        MyGridView gvHot;
+
+        public HotViewHolder(Context mContext, View itemView) {
+            super(itemView);
+            this.mContext = mContext;
+            ButterKnife.bind(this, itemView);
+        }
+
+        public void setData(final List<HomeBean.ResultBean.HotInfoBean> hot_info) {
+            HotAdapter adapter = new HotAdapter(mContext, hot_info);
+            gvHot.setAdapter(adapter);
+            gvHot.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Toast.makeText(mContext, hot_info.get(position).getName(), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(mContext, GoodsInfoActivity.class);
+                    mContext.startActivity(intent);
+                }
+            });
+        }
+    }
+
+
+    class RecommendViewHolder extends RecyclerView.ViewHolder {
+        private final Context mContext;
+        @BindView(R.id.tv_more_recommend)
+        TextView tvMoreRecommend;
+        @BindView(R.id.gv_recommend)
+        GridView gvRecommend;
+
+        public RecommendViewHolder(Context mContext, View itemView) {
+            super(itemView);
+            this.mContext = mContext;
+            Unbinder bind = ButterKnife.bind(this, itemView);
+        }
+
+        public void setData(final List<HomeBean.ResultBean.RecommendInfoBean> recommend_info) {
+            RecommendAdapter adapter = new RecommendAdapter(mContext, recommend_info);
+            gvRecommend.setAdapter(adapter);
+            gvRecommend.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Toast.makeText(mContext, recommend_info.get(position).getName(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 }
 
