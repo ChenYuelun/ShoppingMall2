@@ -1,10 +1,12 @@
-package com.example.shoppingmall2;
+package com.example.shoppingmall2.activity;
 
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
+
+import com.example.shoppingmall2.R;
 
 public class WelcomeActivity extends AppCompatActivity {
 
