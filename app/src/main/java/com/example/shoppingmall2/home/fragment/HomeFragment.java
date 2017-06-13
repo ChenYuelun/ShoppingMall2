@@ -1,5 +1,6 @@
 package com.example.shoppingmall2.home.fragment;
 
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSON;
 import com.example.shoppingmall2.R;
 import com.example.shoppingmall2.base.BaseFragment;
+import com.example.shoppingmall2.home.adapter.HomeAdapter;
 import com.example.shoppingmall2.home.bean.HomeBean;
 import com.example.shoppingmall2.utils.Constants;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -38,6 +40,7 @@ public class HomeFragment extends BaseFragment {
     ImageButton ibTop;
     Unbinder unbinder;
     private String homeUrl;
+    private HomeAdapter adapter;
 
     /**
      * 初始化控件
@@ -83,7 +86,7 @@ public class HomeFragment extends BaseFragment {
                 Toast.makeText(mContext, "查看", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.ib_top:
-                Toast.makeText(mContext, "回到顶部", Toast.LENGTH_SHORT).show();
+                rvHome.scrollToPosition(0);
                 break;
         }
     }
@@ -107,6 +110,24 @@ public class HomeFragment extends BaseFragment {
         //解析数据
         HomeBean homeBean = JSON.parseObject(json,HomeBean.class);
         Log.e(TAG,"解析成功了=="+homeBean.getResult().getAct_info().get(0).getName());
+        //设置适配器
+        adapter = new HomeAdapter(mContext,homeBean.getResult());
+        rvHome.setAdapter(adapter);
+
+        //设置布局管理器
+        GridLayoutManager liner = new GridLayoutManager(mContext, 1);
+        rvHome.setLayoutManager(liner);
+        liner.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if(position <= 3) {
+                    ibTop.setVisibility(View.GONE);
+                }else {
+                    ibTop.setVisibility(View.VISIBLE);
+                }
+                return 1;
+            }
+        });
     }
 
 }
