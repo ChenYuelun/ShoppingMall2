@@ -10,7 +10,7 @@ import com.example.shoppingmall2.R;
 import com.example.shoppingmall2.base.BaseFragment;
 import com.example.shoppingmall2.community.CommunityFragment;
 import com.example.shoppingmall2.home.fragment.HomeFragment;
-import com.example.shoppingmall2.shoppingcart.ShoppingCartFragment;
+import com.example.shoppingmall2.shoppingcart.fragment.ShoppingCartFragment;
 import com.example.shoppingmall2.type.TypeFragment;
 import com.example.shoppingmall2.user.UserFragment;
 

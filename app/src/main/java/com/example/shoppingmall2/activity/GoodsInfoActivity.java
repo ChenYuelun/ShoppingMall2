@@ -17,8 +17,10 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.shoppingmall2.R;
+import com.example.shoppingmall2.app.MyApplication;
 import com.example.shoppingmall2.home.adapter.HomeAdapter;
 import com.example.shoppingmall2.home.bean.GoodsBean;
+import com.example.shoppingmall2.shoppingcart.utils.CartStorage;
 import com.example.shoppingmall2.utils.Constants;
 
 import butterknife.BindView;
@@ -158,6 +160,7 @@ public class GoodsInfoActivity extends AppCompatActivity {
                 break;
             case R.id.btn_good_info_addcart:
                 Toast.makeText(GoodsInfoActivity.this, "添加到购物车", Toast.LENGTH_SHORT).show();
+                CartStorage.getInstance(MyApplication.getContext()).addData(goodsBean);
                 break;
             case R.id.tv_more_share:
                 Toast.makeText(GoodsInfoActivity.this, "分享", Toast.LENGTH_SHORT).show();
