@@ -20,6 +20,15 @@ public class GoodsBean implements Serializable {
     private String product_id;
 
     private int number = 1;
+    private boolean isChecked = true;
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
+    }
 
     public int getNumber() {
         return number;
@@ -69,6 +78,7 @@ public class GoodsBean implements Serializable {
                 ", name='" + name + '\'' +
                 ", product_id='" + product_id + '\'' +
                 ", number=" + number +
+                ", isChecked=" + isChecked +
                 '}';
     }
 }

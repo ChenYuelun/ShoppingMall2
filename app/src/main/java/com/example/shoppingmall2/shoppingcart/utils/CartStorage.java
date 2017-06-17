@@ -2,6 +2,7 @@ package com.example.shoppingmall2.shoppingcart.utils;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.SparseArray;
 
 import com.example.shoppingmall2.home.bean.GoodsBean;
@@ -64,7 +65,7 @@ public class CartStorage {
     public void addData(GoodsBean goodsBean){
         GoodsBean temp = sparseArray.get(Integer.parseInt(goodsBean.getProduct_id()));
         if(temp != null) {
-            temp.setNumber(goodsBean.getNumber());
+            temp.setNumber(goodsBean.getNumber() + temp.getNumber());
         }else {
             temp = goodsBean;
         }
@@ -85,6 +86,7 @@ public class CartStorage {
     //更新数据
     public void updataData(GoodsBean goodsBean){
         sparseArray.put(Integer.parseInt(goodsBean.getProduct_id()),goodsBean);
+        Log.e("TAG","数据更新");
         savaToLocal();
     }
 

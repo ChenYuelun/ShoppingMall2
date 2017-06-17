@@ -1,5 +1,6 @@
 package com.example.shoppingmall2.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -11,7 +12,7 @@ import com.example.shoppingmall2.base.BaseFragment;
 import com.example.shoppingmall2.community.CommunityFragment;
 import com.example.shoppingmall2.home.fragment.HomeFragment;
 import com.example.shoppingmall2.shoppingcart.fragment.ShoppingCartFragment;
-import com.example.shoppingmall2.type.TypeFragment;
+import com.example.shoppingmall2.type.fragment.TypeFragment;
 import com.example.shoppingmall2.user.UserFragment;
 
 import java.util.ArrayList;
@@ -100,6 +101,19 @@ public class MainActivity extends AppCompatActivity {
             }
             ft.commit();
             tempFragment = currentFragment;
+        }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        int checkid = intent.getIntExtra("checkid", R.id.rb_home);
+        if(checkid ==R.id.rb_home){
+            //选中首页
+            rgMain.check(R.id.rb_home);
+        }else if(checkid ==R.id.rb_cart){
+            //选中购物车
+            rgMain.check(R.id.rb_cart);
         }
     }
 }
